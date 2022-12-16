@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% load static %}
+    <meta charset="UTF-8">
+    <title>{% block title %}Title{% endblock %}</title>
+   <link rel="stylesheet" href="{% static 'css/anime.css'%}">
+    {% block link %}{% endblock %}
+</head>
+<body>
+<div class="div-body">
+        <nav class="container">
+            <div class="nav_wrapper"><a href="{% url 'index' %}" class="logo">ForestCard</a>
+                <form><input class="nav_search" placeholder="Поиск"></form>
+                <ul class="menu">
+                    <li><a href="{% url 'index' %}" class="link">Главная</a></li>
+                    {% if user.is_authenticated %}
+                    <li ><a href="{% url 'logout' %}" class="link">Выход</a></li>
+                    <li id="my_list_link"><a href="{% url 'payments' %}" class="link">Мои билеты</a></li>
+                    {% else %}
+                    <li ><a href="{% url 'login' %}" class="link">Вход</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+  {%block content %} {% endblock %}
+        <footer class="container"><a href="https://www.instagram.com/nove_enov/" class="link">2022 dimka</a></footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}{{film.title}}{% endblock %}
+{% block content %}
+<div class="container_content prokrutka">
+                    <div class="main_content">
+                        <div class="container_content_movie">
+                            <div class="movie_poster_info">
+                                <div class="movie_img"><img src="{{film.image}}" class="movie_cover"></div>
+                                <div class="movie_right_info">
+                                    <div class="movie_2_title">{{film.title}}</div>
+                                    <div class="year">Год производства: <span class="year_result">{{film.premier_year}}</span></div>
+                                    <div class="country">Страна: <span class="country_result">{{film.country}}</span></div>
+                                    <div class="genres">Жанры: <span class="genres_result">{{film.type}}</span></div>
+<!--                                    <div class="slogan">Слоган: <span class="slogan_result">"Заходи на праздник!"</span></div>-->
+<!--                                    <div class="film_length">Время: <span class="film_length_result">94 мин.</span></div>-->
+                                    <div class="rating">Рейтинг кинопоиска: <span class="rating_kp_result">{{film.rating}}</span></div>
+<!--                                    <div class="rating">Рейтинг imdb: <span class="rating_imdb_result">0 оценок</span></div>-->
+                                    <div class="rating">Возрастной рейтинг: <span class="rating_age_result">{{film.age_rating}}</span></div>
+                                </div>
+                            </div>
+                            <hr>
+<!--    -->
+  <div class="calendar">
+                                <!---->
+     <div class="calendar__center" style="height: 4.375rem;">
+       <div class="calendar-dates" style="left: 0px;">
+           {% block dates %}
+           {% for date, left in dates.items %}
+           <a href="{% url 'film_dated' film.id date.id %}">
+         <div class="calendar-slot date" style="left: {{left}}px;">
+            <div class="date-content">
+                <span class="day">{{date.weekday}}</span>
+                <span class="date">{{date.day}}</span>
+                <span class="mounth">{{date.month}}</span>
+            </div>
+         </div>
+           </a>
+           {% endfor %}
+           {% endblock %}
+       </div>
+     </div>
+                                <!---->
+     <div class="mini-c">
+     </div>
+  </div>
+<!--                            -->
+                           {%block time %}
+                            {% endblock %}
+                            {% block button %}
+    {% endblock %}
+                            <hr>
+<div class="movie_description">{{film.description}}</div>
+</div> </div>
+                <!-- </div> -->
+</div>
+{% endblock %}
+

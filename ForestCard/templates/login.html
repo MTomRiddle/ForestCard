@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title%} {% endblock %}
+
+{% block content %}
+<div class="container_content">
+                <div class="movies">
+                    <div id="login_page" class="login-page">
+                        <div class="form_login">
+                            <form class="login-form" method="post">
+                              {% csrf_token %}
+                                {{form.as_p}}
+                                <button type="submit">вход</button>
+                                {% if error %}
+                                <p>{{error}}</p>
+                                {% endif %}
+                                <p class="message">Не зарегистрирован аккаунт? <a href="{% url 'registration' %}">Зарегистрироваться</a>
+                                </p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+{% endblock %}

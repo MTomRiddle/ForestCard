@@ -1,0 +1,47 @@
+{% extends "films_detail.html" %}
+
+{% block dates %}
+           {% for date, left in dates.items %}
+            {% if date.id == date_id %}
+           <a href="{% url 'film_dated' film.id date.id %}">
+         <div class="calendar-slot date active" style="left: {{left}}px; color: rgb(238, 110, 115);">
+             <div class="date-content">
+                <span class="day">{{date.weekday}}</span>
+                <span class="date">{{date.day}}</span>
+                <span class="mounth">{{date.month}}</span>
+            </div>
+         </div>
+           </a>
+               {% else %}
+            <a href="{% url 'film_dated' film.id date.id %}">
+         <div class="calendar-slot date" style="left: {{left}}px;">
+
+            <div class="date-content">
+                <span class="day">{{date.weekday}}</span>
+                <span class="date">{{date.day}}</span>
+                <span class="mounth">{{date.month}}</span>
+            </div>
+         </div>
+           </a>
+            {% endif %}
+           {% endfor %}
+{% endblock %}
+
+
+{% block time%}
+   <div class="time_cont">
+                                <!---->
+       <div class="time__center" style="height: 4.375rem;">
+           <div class="time-dates" style="left: 0px;">
+               {% for time, left in times.items %}
+               <a href="{% url 'film_timed' film.id date_id time.id%}">
+               <div class="time-slot time" style="left: {{left}}px;">
+                   <div class="time-content"><span class="time">{{time.str}}</span></div>
+               </div>
+               </a>
+               {% endfor %}
+           </div>
+       </div>
+       <!---->
+   </div>
+{% endblock %}

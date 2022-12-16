@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title%} {%endblock%}
+
+{% block content %}
+<div class="hall">
+                    <div class="screen">Экран</div>
+                    <div class="cinemaHall zal1">
+                        {% for row_num, row in places.items %}
+                            <span class="number_row">{{row_num}}</span>
+                            {% for place in row %}
+                                {% if place.is_free %}
+                                    {% if place in chosen_places%}
+                                        <a href="{% url 'choose_place' film_id time_id place.id%}" class="place">
+                                        <div class="seat chosen" data-row="{{place.row}}" data-seat="{{place.place}}">&nbsp;</div>
+                                        </a>
+                                    {% else %}
+                                    <a href="{% url 'choose_place' film_id time_id place.id%}" class="place">
+                                        <div class="seat bay" data-row="{{place.row}}" data-seat="{{place.place}}">&nbsp;</div>
+                                    </a>
+                                    {% endif %}
+                                {% else%}
+                                    <div class="seat" data-row="{{place.row}}" data-seat="{{place.place}}">&nbsp;</div>
+                                {% endif %}
+                            {% endfor %}
+                            <span class="number_row">{{row_num}}</span>
+                            <div class="passageBetween">&nbsp;</div>
+                        {% endfor %}
+                    <div class="button_sale"><a href="{% url 'pay' film_id time_id%}" class="glow-button">Купить</a></div>
+                </div>
+</div>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Главная{% endblock %}
+{% block content%}
+<div class="container_content">
+   <div class="movies">
+     {% for film in films%}
+      <div class="movie">
+         <a href="{% url 'film_detail' film.id %}">
+         <div class="movie_cover-inner">
+            <img src="{{film.image}}" class="movie_cover" alt="{{film.title}}">
+            <div class="movie_cover--darkened"></div>
+
+         </div>
+         <div class="movie_info">
+            <div class="movie_title"><p class="prek">{{film.title}}</p></div>
+            <div class="movie_country">{{film.premier_year}}, Россия</div>
+            <div class="movie_average movie_average--red">{{film.rating}}</div>
+         </div>
+         </a>
+      </div>
+      {% endfor %}
+   </div>
+</div>
+{% endblock %}

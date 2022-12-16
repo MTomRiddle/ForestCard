@@ -1,0 +1,36 @@
+{% extends 'film_dated.html' %}
+{% block time %}
+<div class="time_cont">
+       <div class="time__center" style="height: 4.375rem;">
+           <div class="time-dates" style="left: 0px;">
+               {% for time, left in times.items %}
+             {% if time.id == time_id %}
+               <a href="{% url 'film_timed' film.id date_id time.id%}">
+               <div class="time-slot time active" style="left: {{left}}px; color: rgb(238, 110, 115);">
+                   <div class="time-content"><span class="time">{{time.str}}</span></div>
+               </div>
+               </a>
+             {% else %}
+               <a href="{% url 'film_timed' film.id date_id time.id%}">
+                <div class="time-slot time" style="left: {{left}}px;">
+                    <div class="time-content"><span class="time">{{time.str}}</span></div>
+                </div>
+               </a>
+             {% endif %}
+               {% endfor %}
+           </div>
+       </div>
+   </div>
+{% endblock %}
+
+{% block button %}
+{% if user.is_authenticated %}
+<div class="button_sale">
+    <a class="glow-button" href="{% url 'places' film.id time_id%}">
+        <p>Купить</p>
+    </a>
+</div>
+{% else %}
+<p>Чтобы купить билет <a href="{% url 'login' %}">войдите</a> на сайт или <a href="{% url 'registration' %}">зарегистрируйтесь</a></p>
+{% endif %}
+{% endblock %}

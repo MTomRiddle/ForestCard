@@ -1,0 +1,651 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html {
+    height: 100%;
+}
+body {
+    height: 100%;
+    width: 100%;
+    background-color: #fcf2f2;
+    font-family: "Open Sans", sans-serif;
+}
+.div-body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.prokrutka {
+    overflow-y: auto;
+}
+.top_obertka {
+    flex-grow: 1;
+  }
+.container{
+    width: 100%;
+    margin: 0 auto;
+    flex: 0 0 auto;
+}
+.container_content {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    flex: 1 0 auto;
+}
+.nav_wrapper{
+    width: 100%;
+    background-color: #ee6e73;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+    height: 60px;
+}
+
+.menu {
+    height: 100%;
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    color:#fcf2f2;
+    font-size: 2.5rem;
+    text-decoration: none;
+}
+
+.link {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.25rem;
+    margin-left: 20px;
+    cursor: pointer;
+}
+.link:hover {
+    color: #eec4f2;
+}
+
+.nav_search {
+    padding: 8px;
+    border: 2px solid #ee6e73;
+    border-radius: 5px;
+    outline: none;
+}
+
+.movies {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.movie {
+    width: 240px;
+    margin: 10px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+.movie_cover-inner {
+    position: relative;
+    height: 360px;
+}
+.movie_cover {
+    max-width: 100%;
+    height: 100%;
+}
+.movie_cover--darkened {
+    background-color: #fff;
+    opacity: 0.1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    max-width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+.movie_cover--darkened:hover {
+    background-color: gray;
+    cursor: pointer;
+}
+.movie_info {
+    padding: 5px 0px;
+}
+.movie_title {
+    cursor: pointer;
+    margin-bottom: 4px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #4d2d7a;
+}
+.movie_title:hover {
+    text-decoration: underline;
+}
+
+.movie_country {
+    font-size: 11px;
+    font-weight: bold;
+    color: #ae84e8;
+    display: flex;
+}
+.movie_average {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 0;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: gray;
+    color:#fcf2f2;
+    font-size: 14px;
+}
+.movie_average--green {
+    border: 5px solid green;
+}
+.movie_average--orange {
+    border: 5px solid orange;
+}
+.movie_average--red {
+    border: 5px solid red;
+}
+
+
+
+.login-page {
+    width: 360px;
+    padding: 8% 0 0;
+    margin: auto;
+    flex: 1 0 auto;
+  }
+  .form_login {
+    position: relative;
+    z-index: 1;
+    background: #FFFFFF;
+    max-width: 360px;
+    margin: 0 auto 100px;
+    padding: 45px;
+    text-align: center;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  }
+  .form_login input {
+    font-family: "Roboto", sans-serif;
+    outline: 0;
+    background: #f2f2f2;
+    width: 100%;
+    border: 0;
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+  }
+  .form_login button {
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    outline: 0;
+    background-color: #ee6e73;
+    display: flex;
+    width: 100%;
+    border: 0;
+    padding: 15px;
+    color: #FFFFFF;
+    font-size: 14px;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
+  }
+  .form_login button:hover,.form_login button:active,.form_login button:focus {
+    background-color: #ee6e73;
+  }
+  .form_login .message {
+    margin: 15px 0 0;
+    color: #b3b3b3;
+    font-size: 12px;
+  }
+  .form_login .message a {
+    color: #ee6e73;
+    text-decoration: none;
+  }
+
+.main_content {
+    flex: 1 0 auto;
+}
+
+.container_content_movie {
+    border: 5px;
+    width: 100%;
+    height: 633px;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding-top: 40px;
+    display: flex;
+    flex-direction: column;
+}
+
+.movie_poster_info {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.movie_img {
+    max-width: 100%;
+    height: 360px;
+}
+.movie_right_info {
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+    margin-left: 40px;
+    font-size: 17px;
+    color: gray;
+}
+.movie_2_title {
+    color: black;
+    font-size: x-large;
+    font-weight: bolder;
+    max-width: 400px;
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.year {
+    margin-top: 1rem;
+}
+.country {
+    margin-top: 1rem;
+}
+.genres {
+    margin-top: 1rem;
+}
+.slogan {
+    margin-top: 1rem;
+}
+.film_length {
+    margin-top: 1rem;
+}
+.rating {
+    margin-top: 1rem;
+}
+.year_result {
+    color: black;
+    margin-top: 1rem;
+}
+.country_result {
+    color: black;
+    margin-top: 1rem;
+}
+.genres_result {
+    color: black;
+    margin-top: 1rem;
+}
+.slogan_result {
+    color: black;
+    margin-top: 1rem;
+}
+.film_length_result {
+    color: black;
+    margin-top: 1rem;
+}
+.rating_kp_result {
+    color: black;
+    margin-top: 1rem;
+}
+.rating_imdb_result {
+    color: black;
+    margin-top: 1rem;
+}
+.rating_age_result {
+    color: black;
+    margin-top: 1rem;
+}
+.movie_description {
+    margin-top: 2rem;
+    font-size: large;
+}
+
+.container_content_movie hr {
+    margin-top: 40px;
+}
+
+
+/*стилистика оценки*/
+
+.style_picker {
+    color: rgba(255,255,255,.2);
+    background-color: #222;
+}
+
+.rating_picker {
+    width: 360px;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    padding: 4px 15px;
+    font-family: Graphik Kinopoisk LC Web,Tahoma,Arial,Verdana,sans-serif;
+    border-radius: 20px;
+}
+
+
+
+
+
+.style_button {
+    flex: 0 0 28px;
+    width: 28px;
+    height: 24px;
+    padding: 0;
+    font-size: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+    color: inherit;
+    border: none;
+    background-color: transparent;
+}
+
+.style_button:hover {
+    color: #f2f2f2;
+    font-family: inherit;
+    font-size: 140%;
+    line-height: 1.15;
+    margin: 0px;
+}
+
+.style_item {
+    display: block;
+    transition: .2s ease;
+}
+
+footer {
+    flex: 0 0 auto;
+    background-color: #ee6e73;
+    color: whitesmoke;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.sale_info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.title_for_saleframe {
+    margin: 0.5em;
+    color: gray;
+}
+.date_and_time {
+    margin: 0.5em;
+    color: gray;
+}
+.price {
+    margin: 0.5em;
+    color: gray;
+}
+.title_saleframe {
+    color: black;
+}
+.date_and_time_saleframe {
+    color: black;
+}
+.price_saleframe {
+    color: black;
+}
+.screen {
+    margin-top: 2em;
+    margin-bottom: 1em;
+    font-size: 2em;
+}
+.hall {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.cinemaHall {
+    text-align: center;
+    display: inline-block;
+    vertical-align: top;
+  }
+  .seat {
+    height: 10px;
+    width: 10px;
+    margin-right: 2px;
+    background-color: #999999;
+    display: inline-block;
+    cursor: pointer;
+  }
+  .passageBetween {
+    height: 1px;
+    width: 100%;
+    display: block;
+  }
+  .bay {
+    background-color: red;
+  }
+  .chosen {
+    background-color: #2debde;
+  }
+  .place-link{
+    text-decoration: none;
+  }
+  .result {
+    font-size: 1rm;
+    display: inline-block;
+    width: 90px;
+    max-height: 200px;
+    overflow-y: auto;
+    margin-right: 5px;
+  }
+
+  .glow-button {
+    text-decoration: none;
+    display: inline-block;
+    padding: 15px 30px;
+    margin: 10px 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 40px 40px #ee6e73 inset, 0 0 0 0 #ee6e73;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    letter-spacing: 2px;
+    color: white;
+    transition: .15s ease-in-out;
+  }
+  .glow-button:hover {
+    box-shadow: 0 0 10px 0 #ee6e73 inset, 0 0 10px 4px #ee6e73;
+    color: #ee6e73;
+  }
+/*! CSS Used from: Embedded */
+div,span{margin:0;padding:0;border:0;vertical-align:baseline;}
+*,:after,:before{box-sizing:border-box;}
+@media (max-width:60rem){
+::-webkit-scrollbar{width:0;}
+}
+.icon {
+    transition: fill, transform, fill-opacity .35s ease;
+}
+
+.icon path {
+    transition: fill, transform, fill-opacity .35s ease;
+}
+
+.calendar__center {
+    width: 100%;
+    position: relative;
+    overflow-x: hidden;
+    overflow-y: visible;
+}
+
+.calendar__center .calendar-dates {
+    transition: all .5s ease;
+    position: absolute;
+    width: 100%;
+}
+
+.calendar-slot {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 4.375rem;
+    width: 3.75rem;
+    margin: 0 .3125rem;
+}
+
+.calendar-slot.active,
+.calendar-slot:hover {
+    border: 2px solid #ee6e73;
+    background-color: #ee6e73;
+    cursor: pointer;
+}
+
+.calendar-slot.date {
+    position: absolute;
+}
+
+.calendar-slot.date .date-content {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.calendar-slot.date .date-content span+span {
+    padding-top: .25rem;
+}
+
+.calendar-slot.date .date-content span.day {
+    font-size: .75rem;
+    font-weight: 600;
+    color: #000000;
+}
+
+.calendar-slot.date .date-content span.date {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #000000;
+}
+
+.calendar-slot.date .date-content span.mounth {
+    font-size: .75rem;
+    font-weight: 500;
+    color: #ccc;
+}
+
+.calendar-slot.date .clear {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    position: absolute;
+    right: -.125rem;
+    top: -.125rem;
+    width: .875rem;
+    height: .875rem;
+    background-color: #ee2d37;
+}
+
+.calendar-slot.date .clear svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.calendar-slot.date .clear svg path {
+    fill: #fff;
+}
+
+
+
+
+.time__center {
+    width: 100%;
+    position: relative;
+    overflow-x: hidden;
+    overflow-y: visible;
+}
+
+.time__center .time-dates {
+    transition: all .5s ease;
+    position: absolute;
+    width: 100%;
+}
+
+.time-slot {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 4.375rem;
+    width: 3.75rem;
+    margin: 0 .3125rem;
+}
+
+.time-slot.active,
+.time-slot:hover {
+    border: 2px solid #ee6e73;
+    background-color: #ee6e73;
+    cursor: pointer;
+}
+
+.time-slot.time {
+    position: absolute;
+}
+
+.time-slot.time .time-content {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.time-slot.time .time-content span+span {
+    padding-top: .25rem;
+}
+
+.time-slot.time .time-content span.time {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #000000;
+}
+
+.time-slot.time .clear {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    position: absolute;
+    right: -.125rem;
+    top: -.125rem;
+    width: .875rem;
+    height: .875rem;
+    background-color: #ee2d37;
+}
+
+.time-slot.time .clear svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.time-slot.time .clear svg path {
+    fill: #fff;
+}

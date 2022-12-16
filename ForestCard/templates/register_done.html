@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Успешно{% endblock %}
+{% block content %}
+<div class="container_content">
+    <div class="movies">
+        <div id="register_page" class="login-page">
+            <h2>Регистрация прошла успешно</h2>
+            <a href="{% url 'index' %}">Вернуться на главную страницу</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

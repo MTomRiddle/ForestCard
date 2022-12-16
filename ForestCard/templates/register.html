@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %} {% endblock %}
+
+{% block content %}
+
+
+
+<div class="container_content">
+    <div class="movies">
+        <div id="register_page" class="login-page">
+            <div class="form_login">
+                <form class="register-form" action="." method="post">
+                    {{ user_form.as_p }}
+                    {% csrf_token %}
+                    <p><input type="submit" value="Зарегистрироваться"></p>
+                    <p class="message">Уже зарегистрирован? <a href="{% url 'login' %}">Войти</a></p>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
