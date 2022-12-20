@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %}Мои билеты{% endblock %}
-
+{% block link %}
+ <link rel="stylesheet" href="{% static 'css/history.css'%}">
+{% endblock %}
 {% block content %}
 <div class="container_content">
                 <div class="history_top">
@@ -19,7 +21,6 @@
                                 </div>
                             </div>
                         </div>
-                        <hr>
                          {% endfor %}
                     </div>
                 </div>
