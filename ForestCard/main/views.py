@@ -246,6 +246,8 @@ def pay(request, film_id, time_id):
                         time=Times.objects.get(id=time_id),
                         place=place,
                         )
+        ticket.custDate = CustDate(ticket.time.date)
+        ticket.custTime = CustTime(ticket.time)
         ticket.save()
         amount += ticket.price
         tickets.append(ticket)
@@ -276,6 +278,7 @@ def notify(request, order_id):
         ticket.order = None
         ticket.save()
     order.delete()
+    CHOSEN_PLACES.clear()
 
     return redirect(index)
 

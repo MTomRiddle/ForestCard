@@ -34,6 +34,8 @@ class CustTime:
 
     def str(self):
         return f'{self.hours}:{self.minutes:02}'
+    def __str__(self):
+        return f'{self.hours}:{self.minutes:02}'
 
 class CustDate:
     def __init__(self, date):
@@ -44,3 +46,6 @@ class CustDate:
 
     def __hash__(self):
         return (hash(self.day) + hash(self.month)) % (10**9 + 7)
+
+    def __str__(self):
+        return f'{self.day} {self.month}'

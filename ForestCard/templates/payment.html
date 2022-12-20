@@ -12,22 +12,30 @@
                         <div class="history_element">
                             <div class="history_info">
                                 <div class="history_name">Фильм: {{item.film.title}}</div>
-                                <div class="history_date">Дата: {{item.time.date.date}}</div>
-                                <div class="history_time">Время: {{item.time.time}}</div>
+                                <div class="history_date">Дата: {{item.custDate}}</div>
+                                <div class="history_time">Время: {{item.custTime}}</div>
                             </div>
                             <div class="history_seats">
                                 <div class="history_seat">
                                     Ряд: {{item.place.row}} Место: {{item.place.place}}
                                 </div>
                             </div>
+                            <div>${{item.price}}</div>
                         </div>
-                        <hr>
                          {% endfor %}
+                        <div class="history_element">
+                            <div class="history_info">
+                                <div class="history_name">Итого: ${{amount}}</div>
+                                <div class="history_date">{{ form.render }}</div>
+                                <div class="history_time"></div>
+                            </div>
+                        </div>
                     </div>
 
-                    {{ form.render }}
                 </div>
+
 </div>
+
 
 
 {% endblock %}

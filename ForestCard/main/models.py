@@ -54,9 +54,9 @@ class Ticket(models.Model):
     place = models.ForeignKey(Places, on_delete=models.CASCADE)
     time = models.ForeignKey(Times, on_delete=models.CASCADE)
     price = models.DecimalField(max_digits=4, decimal_places=2, default=8)
+    custDate = models.CharField(max_length=100, null=True)
+    custTime = models.CharField(max_length=100, null=True)
 
-    def __str__(self):
-        return self.user + " " + self.place
 
 class Premier(Film):
     premier_month = models.CharField(max_length=20)
