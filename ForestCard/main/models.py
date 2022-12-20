@@ -18,14 +18,14 @@ class Film(models.Model):
 
 class Date(models.Model):
     date = models.DateField()
-    film = models.ForeignKey(Film, on_delete=models.PROTECT)
+    film = models.ForeignKey(Film, on_delete=models.CASCADE)
 
     def __str__(self):
         return str(self.date) + " " + str(self.film.title)
 
 
 class Times(models.Model):
-    date = models.ForeignKey(Date, on_delete=models.PROTECT)
+    date = models.ForeignKey(Date, on_delete=models.CASCADE)
     time = models.TimeField()
 
     def __str__(self):
@@ -45,6 +45,9 @@ class Places(models.Model):
 class Ticket(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     film = models.ForeignKey(Film, on_delete=models.CASCADE)
-    place = models.ForeignKey(Places, on_delete=models.PROTECT)
-    time = models.ForeignKey(Times, on_delete=models.PROTECT)
+    place = models.ForeignKey(Places, on_delete=models.CASCADE)
+    time = models.ForeignKey(Times, on_delete=models.CASCADE)
     price = models.DecimalField(max_digits=4, decimal_places=2, default=8)
+
+class Premier(Film):
+    premier_month = models.CharField(max_length=20)

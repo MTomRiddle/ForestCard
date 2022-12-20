@@ -14,6 +14,7 @@
                 <form><input class="nav_search" placeholder="Поиск"></form>
                 <ul class="menu">
                     <li><a href="{% url 'index' %}" class="link">Главная</a></li>
+                    <li><a href="{% url 'premiers' %}" class="link">Премьеры</a></li>
                     {% if user.is_authenticated %}
                     <li ><a href="{% url 'logout' %}" class="link">Выход</a></li>
                     <li id="my_list_link"><a href="{% url 'payments' %}" class="link">Мои билеты</a></li>

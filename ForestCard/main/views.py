@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, HttpResponse
-from .models import Film, Date, Times, Places, Ticket
+from .models import Film, Date, Times, Places, Ticket, Premier
 import requests
 import json
 import re
@@ -8,6 +8,7 @@ from .utils import CustDate, CustTime
 from django.contrib.auth.views import LoginView
 from .forms import LoginForm, UserRegistrationForm
 from django.contrib.auth import authenticate, login
+from .paiment import get_payment_link
 
 API_KEY = 'd0a52941-ee41-4d27-91a4-289f360ff1d6'
 
@@ -42,14 +43,15 @@ def register(request):
     return render(request, 'register.html', {'user_form': user_form})
 
 
-def get_films():
-    req = requests.get(url='https://kinopoiskapiunofficial.tech/api/v2.2/films/top?type=TOP_100_POPULAR_FILMS&page=1',
+def get_films(url):
+    req = requests.get(url=url,
                        headers={
                            "Content-Type": "application/json",
                            "X-API-KEY": API_KEY
                        })
     data = json.loads(req.text)
-    films_ids = [item['filmId'] for item in data['films']]
+    col = data['films'] if data.get('films') else data['items']
+    films_ids = [item['filmId'] if item.get('filmId') else item['kinopoiskId'] for item in col]
     films = []
     for id in films_ids:
         req = requests.get(url=f'https://kinopoiskapiunofficial.tech/api/v2.2/films/{id}',
@@ -60,7 +62,6 @@ def get_films():
                            )
         data = json.loads(req.text)
         film = dict()
-        #film['id'] = data.get('kinopoiskId')
         film['title'] = data.get('nameRu')
         film['description'] = data.get('description')
         film['image'] = data.get('posterUrl')
@@ -109,7 +110,7 @@ def load_dates(film):
 
 
 def load_films():
-    films = get_films()
+    films = get_films('https://kinopoiskapiunofficial.tech/api/v2.2/films/top?type=TOP_100_POPULAR_FILMS&page=1')
     for film in films:
         new_film = Film()
         new_film.title = film['title']
@@ -120,6 +121,22 @@ def load_films():
         new_film.type = film['type']
         new_film.country = film['country']
         new_film.age_rating = film['age_rating']
+        new_film.save()
+        load_dates(new_film)
+
+def load_premiers():
+    films = get_films('https://kinopoiskapiunofficial.tech/api/v2.2/films/premieres?year=2022&month=DECEMBER')
+    for film in films:
+        new_film = Premier()
+        new_film.title = film['title']
+        new_film.description = film['description']
+        new_film.image = film['image']
+        new_film.rating = film['rating']
+        new_film.premier_year = film['year']
+        new_film.type = film['type']
+        new_film.country = film['country']
+        new_film.age_rating = film['age_rating']
+        new_film.premier_month = 'декабрь'
         new_film.save()
         load_dates(new_film)
 
@@ -198,6 +215,7 @@ def choose(request, film_id, time_id, place_id):
 
 def pay(request, film_id, time_id):
 
+    amount = 0
     for place in CHOSEN_PLACES:
         ticket = Ticket(user=request.user,
                         film=Film.objects.get(id=film_id),
@@ -205,8 +223,10 @@ def pay(request, film_id, time_id):
                         place=place,
                         )
         ticket.save()
+        amount += ticket.price
         place.is_free = False
         place.save()
+
     return redirect(index)
 
 
@@ -217,3 +237,7 @@ def payment_list(request):
 
 def notify(request):
     HttpResponse('success')
+
+def premiers(request):
+    films = Premier.objects.all()
+    return render(request, 'index.html', {'films': films})

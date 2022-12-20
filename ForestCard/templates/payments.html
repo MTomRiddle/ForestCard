@@ -1,13 +1,28 @@
 {% extends 'base.html' %}
 
-{% block title %} {% endblock %}
+{% block title %}Мои билеты{% endblock %}
 
 {% block content %}
- {% for item in tickets %}
-    <p>Фильм: {{item.film.title}}</p>
-    <p>Дата: {{item.time.date.date}}</p>
-    <p>Время: {{item.time.time}}</p>
-    <p>Ряд: {{item.place.row}} Место: {{item.place.place}}</p>
-    <hr>
- {% endfor %}
+<div class="container_content">
+                <div class="history_top">
+                    <div class="history_container">
+                        {% for item in tickets %}
+                        <div class="history_element">
+                            <div class="history_info">
+                                <div class="history_name">Фильм: {{item.film.title}}</div>
+                                <div class="history_date">Дата: {{item.time.date.date}}</div>
+                                <div class="history_time">Время: {{item.time.time}}</div>
+                            </div>
+                            <div class="history_seats">
+                                <div class="history_seat">
+                                    Ряд: {{item.place.row}} Место: {{item.place.place}}
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                         {% endfor %}
+                    </div>
+                </div>
+</div>
+
 {% endblock %}
