@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{%block title%}Оплата{% endblock %}
+{% block content %}
+<div class="container_content">
+                <div class="history_top">
+                    <div class="history_container">
+                        {% for item in tickets %}
+                        <div class="history_element">
+                            <div class="history_info">
+                                <div class="history_name">Фильм: {{item.film.title}}</div>
+                                <div class="history_date">Дата: {{item.time.date.date}}</div>
+                                <div class="history_time">Время: {{item.time.time}}</div>
+                            </div>
+                            <div class="history_seats">
+                                <div class="history_seat">
+                                    Ряд: {{item.place.row}} Место: {{item.place.place}}
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                         {% endfor %}
+                    </div>
+
+                    {{ form.render }}
+                </div>
+</div>
+
+
+{% endblock %}

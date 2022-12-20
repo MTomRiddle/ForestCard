@@ -42,12 +42,21 @@ class Places(models.Model):
         return str(self.row) + ' ' + str(self.place)
 
 
-class Ticket(models.Model):
+class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    is_completed = models.BooleanField(default=False)
+    amount = models.DecimalField(max_digits=8, decimal_places=2, default=0)
+
+class Ticket(models.Model):
+    user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
+    order = models.ForeignKey(Order, null=True, on_delete=models.CASCADE)
     film = models.ForeignKey(Film, on_delete=models.CASCADE)
     place = models.ForeignKey(Places, on_delete=models.CASCADE)
     time = models.ForeignKey(Times, on_delete=models.CASCADE)
     price = models.DecimalField(max_digits=4, decimal_places=2, default=8)
+
+    def __str__(self):
+        return self.user + " " + self.place
 
 class Premier(Film):
     premier_month = models.CharField(max_length=20)

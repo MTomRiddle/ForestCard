@@ -18,19 +18,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
+import os
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-xbwq95b&(c0a7gs-03iiwii(g$(h77uum!4ea3%(+)76gf_#a$'
 
-SECRET_KEY = os.environ.get('SECRET_KEY', 'xbwq95b&(c0a7gs-03iiwii(g$(h77uum!4ea3%(+)76gf_#a$')
-
 # SECURITY WARNING: don't run with debug turned on in production!
-import os
-DJANGO_DEBUG = ''
-DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
 
 
-ALLOWED_HOSTS = ['forestcard.herokuapp.com', '127.0.0.1']
+DEBUG = True
+
+
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -42,12 +41,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'paypal.standard',
+    'paypal.standard.ipn',
     'main.apps.MainConfig'
 ]
 
+PAYPAL_TEST = True
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',

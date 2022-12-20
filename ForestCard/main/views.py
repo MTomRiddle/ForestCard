@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, HttpResponse
-from .models import Film, Date, Times, Places, Ticket, Premier
+from django.urls import reverse
+from .models import Film, Date, Times, Places, Ticket, Premier, Order
 import requests
 import json
 import re
@@ -8,9 +9,29 @@ from .utils import CustDate, CustTime
 from django.contrib.auth.views import LoginView
 from .forms import LoginForm, UserRegistrationForm
 from django.contrib.auth import authenticate, login
-from .paiment import get_payment_link
+from paypal.standard.forms import PayPalPaymentsForm
 
 API_KEY = 'd0a52941-ee41-4d27-91a4-289f360ff1d6'
+def view_that_asks_for_money(request):
+
+    # What you want the button to do.
+    paypal_dict = {
+        "business": "receiver_email@example.com",
+        "amount": "10000000.00",
+        "item_name": "name of the item",
+        "invoice": "unique-invoice-id",
+        "notify_url": request.build_absolute_uri(reverse('paypal-ipn')),
+        "return": request.build_absolute_uri(reverse('notify')),
+        "cancel_return": request.build_absolute_uri(reverse('places')),
+        "custom": "premium_plan",  # Custom command to correlate to some function later (optional)
+    }
+
+    # Create the instance.
+    form = PayPalPaymentsForm(initial=paypal_dict)
+    context = {"form": form}
+    return render(request, "payment.html", context)
+
+
 
 def user_login(request):
     if request.method == 'POST':
@@ -215,28 +236,55 @@ def choose(request, film_id, time_id, place_id):
 
 def pay(request, film_id, time_id):
 
+    order = Order(user=request.user)
     amount = 0
+    order.save()
+    tickets = []
     for place in CHOSEN_PLACES:
-        ticket = Ticket(user=request.user,
+        ticket = Ticket(order=order,
                         film=Film.objects.get(id=film_id),
                         time=Times.objects.get(id=time_id),
                         place=place,
                         )
         ticket.save()
         amount += ticket.price
-        place.is_free = False
-        place.save()
+        tickets.append(ticket)
+    order.amount = amount
+    order.save()
+
+
+    paypal_dict = {
+        "business": "receiver_email@example.com",
+        "amount": f"{order.amount}",
+        "item_name": "Билеты",
+        "invoice": "unique-invoice-id",
+        "notify_url": request.build_absolute_uri(reverse('paypal-ipn')),
+        "return": request.build_absolute_uri(reverse('notify', kwargs={'order_id':order.id})),
+        "cancel_return": request.build_absolute_uri(reverse('index')),
+        "custom": "premium_plan",
+    }
+
+    form = PayPalPaymentsForm(initial=paypal_dict)
+    context = {"form": form, 'tickets': tickets, 'amount': amount}
+    return render(request, "payment.html", context)
+
+def notify(request, order_id):
+    order = Order.objects.get(id=order_id)
+    tickets = Ticket.objects.filter(order=order)
+    for ticket in tickets:
+        ticket.user = request.user
+        ticket.order = None
+        ticket.save()
+    order.delete()
 
     return redirect(index)
-
 
 def payment_list(request):
     tickets = Ticket.objects.filter(user=request.user)
     return render(request, 'payments.html', {'tickets': tickets})
 
 
-def notify(request):
-    HttpResponse('success')
+
 
 def premiers(request):
     films = Premier.objects.all()
