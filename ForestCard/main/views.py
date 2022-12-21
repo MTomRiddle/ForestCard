@@ -161,6 +161,11 @@ def load_premiers():
         new_film.save()
         load_dates(new_film)
 
+def update_database(request):
+    load_films()
+    load_premiers()
+    return redirect('index')
+
 def index(request):
     films = Film.objects.all()
     return render(request, 'index.html', {'films': films})

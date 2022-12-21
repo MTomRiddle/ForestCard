@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import index, film_detail, film_dated,\
                    film_timed, places, choose, user_login,\
-                   register, notify, payment_list, pay, premiers
+                   register, notify, payment_list, pay, premiers, update_database
 from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
@@ -17,5 +17,6 @@ urlpatterns = [
     path('notify/<int:order_id>', notify, name='notify'),
     path('user/payments/', payment_list, name='payments'),
     path('film/<int:film_id>/<int:time_id>/pay', pay, name='pay'),
-    path('premiers/', premiers, name='premiers')
+    path('premiers/', premiers, name='premiers'),
+    path('update/', update_database)
 ]
